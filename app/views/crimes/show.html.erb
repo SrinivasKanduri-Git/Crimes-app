@@ -1,0 +1,18 @@
+<h1><u>Crime details:</u></h1>
+<ul>
+  <li><u>crime description:</u>
+  <%=@crime.description%></li>
+  <li><u>crime city:</u>
+  <%=@crime.locality.city.city%></li>
+  <li><u>crime locality:</u>
+  <%=@crime.locality.locality%></li>
+  <% if @crime.priority == "high"%>
+    <li><u>crime priority:</u><div style="color:red;"><%=@crime.priority%></div></li>
+    <% elsif @crime.priority == "medium"%>
+    <li><u>crime priority:</u><div style= "color: yellow;"><%=@crime.priority%></div></li>
+    <% else %>
+    <li><u>crime priority:</u><div style= "color: green;"><%=@crime.priority%></div></li>
+  <% end %>
+  <li><u>crime reporter:</u>
+  <%=@crime.crime_reporter.reporter%></li>
+</ul>

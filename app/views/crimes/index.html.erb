@@ -1,0 +1,31 @@
+<h1>Welcome to crime reporting portal</h1>
+<h2>List of all the crimes:</h2>
+<table>
+  <thead>
+    <tr>
+      <td><u>crime description</u></td>
+      <td><u>crime city</u></td>
+      <td><u>crime locality</u></td>
+      <td><u>crime priority</u></td>
+      <td><u>crime reporter</u></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @crimes.each do |crime|%>
+      <tr>
+        <td><%=link_to crime.description, crime_path(crime)%></td>
+        <td><%=crime.locality.city.city%></td>
+        <td><%=crime.locality.locality%></td>
+        <% if crime.priority == "high"%>
+          <td style= "color: red;"><%=crime.priority%></td>
+          <% elsif crime.priority == "medium"%>
+          <td style= "color: yellow;"><%=crime.priority%></td>
+          <% else%>
+          <td style= "color: green;"><%=crime.priority%></td>
+        <% end %>
+        <td><%=crime.crime_reporter.reporter%></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
