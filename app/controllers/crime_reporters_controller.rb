@@ -1,4 +1,4 @@
-class CitiesController < ApplicationController
+class CrimeReportersController < ApplicationController
   before_action :set_crime_reporter, only: %i[show edit update destroy]
 
   def show

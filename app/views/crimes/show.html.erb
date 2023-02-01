@@ -1,5 +1,7 @@
 <h1><u>Crime details:</u></h1>
 <ul>
+  <li><u>crime type:</u>
+  <%=@crime.crime_type%></li>
   <li><u>crime description:</u>
   <%=@crime.description%></li>
   <li><u>crime city:</u>
@@ -13,6 +15,10 @@
     <% else %>
     <li><u>crime priority:</u><div style= "color: green;"><%=@crime.priority%></div></li>
   <% end %>
+  <li><u>Reported on:</u>
+  <%=@crime.created_at.strftime("%m-%d-%y at %I:%M%p")%></li>
   <li><u>crime reporter:</u>
   <%=@crime.crime_reporter.reporter%></li>
 </ul>
+
+<h2><%=link_to 'Edit crime details', edit_crime_path(@crime)%></h2>

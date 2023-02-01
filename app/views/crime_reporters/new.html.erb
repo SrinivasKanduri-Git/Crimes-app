@@ -1,0 +1,9 @@
+<%= render 'shared/errors', obj: @crime_reporter%>
+
+<h1>Add a new crime reporter</h1>
+
+<%=form_for @crime_reporter do |f|%>
+  <%=f.label "reporter name:"%>
+  <%=f.text_field :reporter%>
+  <%=f.submit%>
+<% end %>

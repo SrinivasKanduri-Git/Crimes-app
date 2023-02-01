@@ -1,0 +1,7 @@
+<h1>List of crime reporters:</h1>
+
+<%@crime_reporters.each do |cr|%>
+  <ul>
+    <li><%=link_to cr.reporter, crime_reporter_path(cr)%></li>
+  </ul>
+<% end %>

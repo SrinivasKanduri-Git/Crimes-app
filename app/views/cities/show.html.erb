@@ -1,15 +1,14 @@
 <h1>City information:</h1>
 
-<ul>
-  <li>city name: <%= @city.city %></li>
-  localities in the city:
-  <%@city.localities.each do |loc|%>
-    <ul>
-      <li><%=link_to loc.locality, locality_path(loc)%></li>
-    </ul>
-  <% end %>
-</ul>
+<p>city name: <%= @city.city %></p>
+localities in the city:
+<%@city.localities.each do |loc|%>
+  <ul>
+    <li><%=link_to loc.locality, locality_path(loc)%></li>
+  </ul>
+<% end %>
 
+<p><%=link_to 'add new locality', new_locality_path(city_id: @city.id)%></p>
 <h2>
   <%= link_to 'edit the city', edit_city_path(@city)%> |
   <%= link_to 'delete the city', city_path(@city), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>

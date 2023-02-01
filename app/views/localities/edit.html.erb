@@ -1,0 +1,9 @@
+<%= render 'shared/errors', obj: @locality%>
+
+<h1>Edit locality detalis</h1>
+
+<%=form_for @locality do |f|%>
+  <%=f.label "locality_name:"%>
+  <%=f.text_field :locality%>
+  <%=f.submit%>
+<% end %>
