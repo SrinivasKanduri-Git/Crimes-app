@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_31_111357) do
 
   create_table "crimes", force: :cascade do |t|
     t.text "description"
-    t.enum "priority", null: false, enum_type: "priority"
+    t.integer "priority", default: 0
     t.boolean "resolved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
