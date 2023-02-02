@@ -9,11 +9,26 @@ class CrimesController < ApplicationController
   end
 
   def new
-    @crime = Crime.new
+    @crime = Crime.new(crime_params)
+    unless params[:crime] == nil
+      @city = City.find(params[:crime][:locality][:city_id])
+    end
+    @cities = City.all
+    @locality = Locality.new
+    @cr = CrimeReporter.new
+    @crs = CrimeReporter.all
   end
 
   def create
     @crime = Crime.new(crime_params)
+    if params[:crime][:crime_reporter][:reporter].present?
+      @cr = CrimeReporter.create(reporter: params[:crime][:crime_reporter][:reporter])
+      @crime.crime_reporter_id = @cr.id
+    end
+    if params[:crime][:locality][:locality].present?
+      @locality = Locality.create(locality: params[:crime][:locality][:locality], city_id: params[:crime][:locality][:city_id])
+      @crime.locality_id = @locality.id
+    end
     if @crime.save
       flash[:notice] = "The crime was registered successfully."
       redirect_to @crime
@@ -47,6 +62,8 @@ class CrimesController < ApplicationController
   end
 
   def crime_params
-    params.require(:crime).permit(:description, :priority, :locality_id, :crime_reporter_id, :crime_type)
+    params.fetch(:crime, {}).permit(:description, :locality_id, :crime_reporter_id,
+                          :crime_type, :priority, crime_reporter_attr: [:reporter],
+                          locality_atrr: [:locality, :city_id])
   end
 end

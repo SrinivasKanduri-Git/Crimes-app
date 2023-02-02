@@ -24,11 +24,11 @@
         <td><%=link_to crime.locality.city.city, city_path(crime.locality.city)%></td>
         <td><%=link_to crime.locality.locality, locality_path(crime.locality)%></td>
         <% if crime.priority == "high"%>
-          <td style= "color: red;"><%=crime.priority%></td>
+          <td style= "color: red;"><b><%=crime.priority%></b></td>
           <% elsif crime.priority == "medium"%>
-          <td style= "color: yellow;"><%=crime.priority%></td>
+          <td style= "color: orange;"><b><%=crime.priority%></b></td>
           <% else%>
-          <td style= "color: green;"><%=crime.priority%></td>
+          <td style= "color: green;"><b><%=crime.priority%></b></td>
         <% end %>
         <td><%=link_to crime.crime_reporter.reporter, crime_reporter_path(crime.crime_reporter)%></td>
 
@@ -37,4 +37,7 @@
   </tbody>
 </table>
 
-<h2><%=link_to 'Report a new crime', new_crime_path%></h2>
+<h2>
+  <%=link_to 'Report a new crime', new_crime_path%> |
+  <%=link_to 'Add new city', new_city_path%>
+</h2>

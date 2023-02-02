@@ -9,11 +9,11 @@
   <li><u>crime locality:</u>
   <%=@crime.locality.locality%></li>
   <% if @crime.priority == "high"%>
-    <li><u>crime priority:</u><div style="color:red;"><%=@crime.priority%></div></li>
+    <li><u>crime priority:</u><div style="color:red;"><b><%=@crime.priority%></b></div></li>
     <% elsif @crime.priority == "medium"%>
-    <li><u>crime priority:</u><div style= "color: yellow;"><%=@crime.priority%></div></li>
+    <li><u>crime priority:</u><div style= "color: orange;"><b><%=@crime.priority%></b></div></li>
     <% else %>
-    <li><u>crime priority:</u><div style= "color: green;"><%=@crime.priority%></div></li>
+    <li><u>crime priority:</u><div style= "color: green;"><b><%=@crime.priority%></b></div></li>
   <% end %>
   <li><u>Reported on:</u>
   <%=@crime.created_at.strftime("%m-%d-%y at %I:%M%p")%></li>
@@ -21,4 +21,7 @@
   <%=@crime.crime_reporter.reporter%></li>
 </ul>
 
-<h2><%=link_to 'Edit crime details', edit_crime_path(@crime)%></h2>
+<h2>
+  <%=link_to 'Edit crime details', edit_crime_path(@crime)%> |
+  <%=link_to 'Delete crime details', crime_path(@crime), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+</h2>
