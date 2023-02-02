@@ -5,6 +5,7 @@ class CrimesController < ApplicationController
   end
 
   def index
+    @home = true
     @crimes = Crime.all
   end
 
@@ -63,7 +64,7 @@ class CrimesController < ApplicationController
 
   def crime_params
     params.fetch(:crime, {}).permit(:description, :locality_id, :crime_reporter_id,
-                          :crime_type, :priority, crime_reporter_attr: [:reporter],
+                          :crime_type, :priority, :resolved, crime_reporter_attr: [:reporter],
                           locality_atrr: [:locality, :city_id])
   end
 end

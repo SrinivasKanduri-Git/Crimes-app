@@ -1,5 +1,21 @@
 <head>
   <h1>Welcome to crime reporting portal</h1>
+  <%if logged_in?%>
+    <%r_count=0%>
+    <%u_count=0%>
+    <%@crimes.each do |c|%>
+      <%if c.resolved?%>
+        <%r_count += 1%>
+      <%else%>
+        <%u_count +=1%>
+      <%end%>
+    <% end %>
+    <h3>
+      <p>resolved crimes:<%=r_count%></p>
+      <p>unresolved crimes:<%=u_count%></p>
+      <p>Total crimes:<%=r_count + u_count%></p>
+    </h3>
+  <% end %>
   <h2>List of all the crimes:</h2>
   <style type="text/css">
   td {
@@ -38,6 +54,9 @@
 </table>
 
 <h2>
-  <%=link_to 'Report a new crime', new_crime_path%> |
   <%=link_to 'Add new city', new_city_path%>
+  <%unless logged_in?%>
+  | <%=link_to 'Report a new crime', new_crime_path%>
+  | <%=link_to 'Batman login', login_path%>
+  <% end %>
 </h2>

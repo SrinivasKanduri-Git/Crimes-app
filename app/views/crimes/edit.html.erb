@@ -9,5 +9,12 @@
   <%=f.text_area :description%></p>
   <p><%=f.label "priority:"%>
   <%=f.select :priority, Crime.priorities.keys%></p>
+  <%if logged_in?%>
+    <p><%=f.label "status:"%>
+    <%=f.radio_button(:resolved, "true")%>
+    <%=f.label(:resolved, "resolved")%>
+    <%=f.radio_button(:resolved, "false")%>
+    <%=f.label(:resolved, "unresolved")%></p>
+  <%end%>
   <%=f.submit%>
 <% end %>

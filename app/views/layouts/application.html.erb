@@ -15,5 +15,12 @@
       <%= msg%>
     <% end %>
     <%= yield %>
+    <% unless @home %>
+      <%=render 'shared/home_link'%>
+    <% else %>
+      <%if logged_in?%>
+        <%=link_to 'log out', logout_path, method: :delete%>
+      <% end %>
+    <% end %>
   </body>
 </html>

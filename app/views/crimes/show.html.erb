@@ -4,10 +4,20 @@
   <%=@crime.crime_type%></li>
   <li><u>crime description:</u>
   <%=@crime.description%></li>
-  <li><u>crime city:</u>
+  <li><u>city:</u>
   <%=@crime.locality.city.city%></li>
-  <li><u>crime locality:</u>
+  <li><u>locality:</u>
   <%=@crime.locality.locality%></li>
+  <%if logged_in?%>
+    <li>
+      <u>crime status:</u>
+      <%if @crime.resolved?%>
+        resolved
+      <%else%>
+        unresolved
+      <%end%>
+    </li>
+  <%end%>
   <% if @crime.priority == "high"%>
     <li><u>crime priority:</u><div style="color:red;"><b><%=@crime.priority%></b></div></li>
     <% elsif @crime.priority == "medium"%>
@@ -22,6 +32,8 @@
 </ul>
 
 <h2>
-  <%=link_to 'Edit crime details', edit_crime_path(@crime)%> |
-  <%=link_to 'Delete crime details', crime_path(@crime), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+  <%=link_to 'Edit crime details', edit_crime_path(@crime)%>
+  <%if logged_in?%>
+  | <%=link_to 'Delete crime details', crime_path(@crime), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+  <%end%>
 </h2>
