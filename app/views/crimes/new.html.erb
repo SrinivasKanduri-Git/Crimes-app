@@ -1,40 +1,42 @@
-<%=render 'shared/errors', obj:@crime%>
+<div class="container">
+  <%=render 'shared/errors', obj:@crime%>
 
-<h1>Reporting a new crime</h1>
-<%unless @cities==nil && @localities == nil && @crs == nil%>
-<%=form_for @crime do |f|%>
-    <p><%=f.label "crime type:"%>
-    <%=f.text_field :crime_type%></p>
-    <p><%=f.label "description:"%>
-    <%=f.text_area :description%></p>
-    <%=f.fields_for @locality do |f|%>
-    <div data-controller="form-element">
-      <%= f.button "Validate", formaction: new_crime_path, formmethod: :get,
-      data: { turbo_frame: :locality_field, form_element_target: "submitbtn"} %>
-      <%= f.label "Cities:"%>
-      <%= f.collection_select :city_id, @cities.order(:city),:id,:city,
-      {include_blank: "select"}, { data: { action: "change->form-element#remotesubmit"} } %>
-    </div>
-    <% end %>
-    <%= turbo_frame_tag :location_field do %>
-      <p>
-        <%unless @city == nil%>
-          <%=f.label "locality:"%>
-          <%=f.collection_select :locality_id, @city.localities.order(:locality), :id, :locality, include_blank: "select"%> or
-          <%=f.fields_for @locality do |f|%>
-            <%=f.text_field :locality%>
-          <%end%>
-        <% end %>
+  <h1 class="mt-4 mb-2">Reporting a new crime</h1>
+  <%unless @cities==nil && @localities == nil && @crs == nil%>
+  <%=form_for @crime do |f|%>
+      <p><%=f.label "crime type:"%>
+      <%=f.text_field :crime_type%></p>
+      <p><%=f.label "description:"%>
+      <%=f.text_area :description%></p>
+      <%=f.fields_for @locality do |f|%>
+      <div data-controller="form-element">
+        <%= f.button "Validate", formaction: new_crime_path, formmethod: :get,
+        data: { turbo_frame: :locality_field, form_element_target: "submitbtn"} %>
+        <%= f.label "Cities:"%>
+        <%= f.collection_select :city_id, @cities.order(:city),:id,:city,
+        {include_blank: "select"}, { data: { action: "change->form-element#remotesubmit"} } %>
+      </div>
+      <% end %>
+      <%= turbo_frame_tag :location_field do %>
+        <p>
+          <%unless @city == nil%>
+            <%=f.label "locality:"%>
+            <%=f.collection_select :locality_id, @city.localities.order(:locality), :id, :locality, include_blank: "select"%> or
+            <%=f.fields_for @locality do |f|%>
+              <%=f.text_field :locality%>
+            <%end%>
+          <% end %>
+        </p>
+      <% end %>
+      <p><%=f.label "priority:"%>
+      <%=f.select :priority, Crime.priorities.keys%></p>
+      <p><%=f.label "reporter name:"%>
+      <%=f.collection_select :crime_reporter_id, @crs.order(:reporter), :id, :reporter, include_blank: "select"%> or
+      <%=f.fields_for @cr do |f|%>
+        <%=f.text_field :reporter%>
+      <% end %>
       </p>
-    <% end %>
-    <p><%=f.label "priority:"%>
-    <%=f.select :priority, Crime.priorities.keys%></p>
-    <p><%=f.label "reporter name:"%>
-    <%=f.collection_select :crime_reporter_id, @crs.order(:reporter), :id, :reporter, include_blank: "select"%> or
-    <%=f.fields_for @cr do |f|%>
-      <%=f.text_field :reporter%>
-    <% end %>
-    </p>
-    <%=f.submit "Report crime"%>
-<% end %>
-<% end %>
+      <%=f.submit "Report crime"%>
+  <% end %>
+  <% end %>
+</div>

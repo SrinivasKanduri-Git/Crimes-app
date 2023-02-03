@@ -1,5 +1,5 @@
 <head>
-  <h1>Welcome to crime reporting portal</h1>
+  <h1 class="container mt-2 text-center"><b>Welcome to crime reporting portal</b></h1>
   <%if logged_in?%>
     <%r_count=0%>
     <%u_count=0%>
@@ -23,14 +23,14 @@
   }
 </style>
 </head>
-<table>
+<table class="table table-bordered container mb-4 border-dark">
   <thead>
     <tr>
-      <td><u>crime type</u></td>
-      <td><u>crime city</u></td>
-      <td><u>crime locality</u></td>
-      <td><u>crime priority</u></td>
-      <td><u>crime reporter</u></td>
+      <td><b>crime type</b></td>
+      <td><b>crime city</b></td>
+      <td><b>crime locality</b></td>
+      <td><b>crime priority</b></td>
+      <td><b>Actions</b></td>
     </tr>
   </thead>
   <tbody>
@@ -40,23 +40,27 @@
         <td><%=link_to crime.locality.city.city, city_path(crime.locality.city)%></td>
         <td><%=link_to crime.locality.locality, locality_path(crime.locality)%></td>
         <% if crime.priority == "high"%>
-          <td style= "color: red;"><b><%=crime.priority%></b></td>
+          <td class="text-danger"><b><%=crime.priority%></b></td>
           <% elsif crime.priority == "medium"%>
-          <td style= "color: orange;"><b><%=crime.priority%></b></td>
+          <td class="text-warning"><b><%=crime.priority%></b></td>
           <% else%>
-          <td style= "color: green;"><b><%=crime.priority%></b></td>
+          <td class="text-success"><b><%=crime.priority%></b></td>
         <% end %>
-        <td><%=link_to crime.crime_reporter.reporter, crime_reporter_path(crime.crime_reporter)%></td>
+        <td>
+          <%=link_to 'View', crime, class: "btn btn-outline-success"%>
+          <%=link_to 'Edit', edit_crime_path(crime), class: "btn btn-outline-primary"%>
+          <%=link_to 'Delete', crime, class: "btn btn-outline-danger", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+        </td>
 
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<h2>
-  <%=link_to 'Add new city', new_city_path%>
+<h2 class="text-center p-2">
+  <%=link_to 'Add new city', new_city_path, class: "btn btn-success"%>
   <%unless logged_in?%>
-  | <%=link_to 'Report a new crime', new_crime_path%>
-  | <%=link_to 'Batman login', login_path%>
+    <%=link_to 'Report a new crime', new_crime_path, class: "btn btn-primary"%>
+    <%=link_to 'Batman login', login_path, class: "btn btn-secondary"%>
   <% end %>
 </h2>
