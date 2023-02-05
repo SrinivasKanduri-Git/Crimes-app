@@ -14,7 +14,8 @@
         data: { turbo_frame: :locality_field, form_element_target: "submitbtn"} %>
         <%= f.label "Cities:"%>
         <%= f.collection_select :city_id, @cities.order(:city),:id,:city,
-        {include_blank: "select"}, { data: { action: "change->form-element#remotesubmit"} } %>
+        {include_blank: "select"},
+        { data: { action: "change->form-element#remotesubmit"} } %>
       </div>
       <% end %>
       <%= turbo_frame_tag :location_field do %>

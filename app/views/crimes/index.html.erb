@@ -60,7 +60,7 @@
 <h2 class="text-center p-2">
   <%=link_to 'Add new city', new_city_path, class: "btn btn-success"%>
   <%unless logged_in?%>
-    <%=link_to 'Report a new crime', new_crime_path, class: "btn btn-primary"%>
+    <%=link_to 'Report a new crime', new_crime_path, data: {controller: 'crime-modal'}, class: "btn btn-primary"%>
     <%=link_to 'Batman login', login_path, class: "btn btn-secondary"%>
   <% end %>
 </h2>
